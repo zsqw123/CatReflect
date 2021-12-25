@@ -1,0 +1,16 @@
+buildscript {
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/public" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+    }
+}
+
+subprojects {
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/public" }
+        mavenCentral()
+    }
+}

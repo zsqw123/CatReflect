@@ -1,0 +1,10 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+group 'com.zsqw123'
+version '1.0-SNAPSHOT'
+
+dependencies {
+}
