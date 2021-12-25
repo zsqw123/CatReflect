@@ -9,9 +9,9 @@ import java.lang.reflect.Field
  * Create by zsqw123
  * Date 2021/12/23 4:14 下午
  */
-class CatValueImpl(
+class CatValueImpl<T>(
     clazz: CatClass, valueName: String, safe: Boolean = false
-) : CatValue(clazz, valueName, safe) {
+) : CatValue<T>(clazz, valueName, safe) {
     private val field: Field by lazy {
         val clz = clazz.getClazz()
         return@lazy try {
@@ -26,12 +26,12 @@ class CatValueImpl(
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T> get(): T {
+    override fun get(): T {
         return field.get(clazz.instance()) as T
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T> set(value: T) {
+    override fun set(value: T) {
         field.set(clazz.instance(), value)
     }
 }

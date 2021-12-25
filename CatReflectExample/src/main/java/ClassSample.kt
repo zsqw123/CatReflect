@@ -10,13 +10,13 @@ fun main() {
     // 访问单参成员函数 / call a member function with 1 parameter
     instance.method("callPrivate")(1)
     // 获取及修改静态属性 / get and modify static property
-    val b = static.prop("b")
-    println(b.get<Int>())
+    val b = static.prop<Int>("b")
+    println(b.get())
     b.set(2)
-    println(b.get<Int>())
+    println(b.get())
     // 获取及修改成员属性 / get and modify member property
-    val a = instance.prop("a")
-    println(a.get<Int>())
+    val a = instance.prop<Int>("a")
+    println(a.get())
     a.set(3)
-    println(a.get<Int>())
+    println(a.get())
 }

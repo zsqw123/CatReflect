@@ -15,8 +15,8 @@ import java.lang.reflect.Constructor
 internal class CatClassImpl(private val innerClazz: Class<*>, safe: Boolean = false) : CatClass(innerClazz, safe) {
     private var innerTypes: Array<Class<*>>? = null
 
-    override fun prop(propName: String): CatValue = CatValue.from(this, propName, false)
-    override fun safeProp(propName: String): CatValue = CatValue.from(this, propName, true)
+    override fun <T> prop(propName: String): CatValue<T> = CatValue.from(this, propName, false)
+    override fun <T> safeProp(propName: String): CatValue<T> = CatValue.from(this, propName, true)
 
     override fun method(methodName: String): CatMethod = CatMethod.from(this, methodName, false)
     override fun safeMethod(methodName: String): CatMethod = CatMethod.from(this, methodName, true)

@@ -19,8 +19,8 @@ abstract class CatClass(private val innerClazz: Class<*>, protected var safe: Bo
     /** 构造函数 */
     abstract override fun invoke(vararg vars: Any?): CatClass
 
-    abstract fun prop(propName: String): CatValue
-    abstract fun safeProp(propName: String): CatValue // no DeclaredField
+    abstract fun <T> prop(propName: String): CatValue<T>
+    abstract fun <T> safeProp(propName: String): CatValue<T> // no DeclaredField
     abstract fun method(methodName: String): CatMethod
     abstract fun safeMethod(methodName: String): CatMethod // no DeclaredMethod
 
