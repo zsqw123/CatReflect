@@ -111,6 +111,8 @@ method("awa")[Int::class, Int::class](1, 2) // Manual type
 ### Value
 
 通过 `catClass.prop("value name")` 获得 `CatValue` / Get `CatValue` by `catClass.prop("value name")`:
+> **注意**：如果无法确定 Value 的类型，那么写成 `Any` 也是可以的，但此时 set 和 get 不受静态类型检查约束。  
+> **Note**: If you can't determine the type of Value, it's okay to write it as `Any`, but then set and get are not subject to static type checking.
 
 ```kotlin
 Class<*>.new.prop<Int>("awa") // static variable
