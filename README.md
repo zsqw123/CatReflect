@@ -13,34 +13,33 @@ If you need to use reflection a lot, then the following methods can save you a l
 1. 获得类 / Get Class
 
 ```kotlin
-// 静态类 / create a static class
-val static = Sample::class.new
-// 单参实例化 / create a instance use constructor
-val instance = Sample::class.new(1)
+val static = Sample::class.new // 静态类 / create a static class
+val instance = Sample::class.new(1) // 单参实例化 / create a instance use constructor
 ```
 
 2. 访问函数 / Invoke Method
 
 ```kotlin
-// 访问双参静态函数 / call a static function with 2 parameters
-static.method("staticPrivate")(1, 2)
-// 访问单参成员函数 / call a member function with 1 parameter
-instance.method("callPrivate")(1)
+static.method("staticPrivate")(1, 2) // 访问双参静态函数 / call a static function with 2 parameters
+instance.method("callPrivate")(1) // 访问单参成员函数 / call a member function with 1 parameter
 ```
 
 3. 访问属性 / Access Properties
 
 ```kotlin
-// 获取及修改静态属性 / get and modify static property
-val b = static.prop<Int>("b")
-println(b.get())
-b.set(2)
-println(b.get())
+val a = instance.prop<Int>("a") // member property
+val b = static.prop<Int>("b") // static property
+
+// 属性委托 / Property Delegation
+var c by a
+c = 1
+log(a.get()) // a.get() = 1
 // 获取及修改成员属性 / get and modify member property
-val a = instance.prop<Int>("a")
-println(a.get())
-a.set(3)
-println(a.get())
+a.set(2)
+println(a.get()) // 2
+// 获取及修改静态属性 / get and modify static property
+b.set(3)
+println(b.get()) // 3
 ```
 
 ## Usage
@@ -119,11 +118,12 @@ Class<*>.new(1, 2).prop<Int>("awa") // member variable
 Class<*>.new.safeProp<Int>("awa") // 使用 safeProp 避免访问变量 / avoid access private variable by safeProp
 ```
 
-得到 CatValue 之后可以通过 `get/set` 方法来操作变量:
+得到 CatValue 之后可以通过 `get/set` 方法来操作变量，或使用属性代理:
 
 ```kotlin
 prop.set(2)
 prop.get()
+var c by prop // Property Delegation
 ```
 
 ## LICENSE

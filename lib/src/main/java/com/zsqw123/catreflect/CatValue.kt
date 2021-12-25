@@ -1,6 +1,7 @@
 package com.zsqw123.catreflect
 
 import com.zsqw123.catreflect.util.getOrCreateValue
+import kotlin.reflect.KProperty
 
 /**
  * Author zsqw123
@@ -12,6 +13,9 @@ abstract class CatValue<T>(
 ) {
     abstract fun get(): T
     abstract fun set(value: T)
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = get()
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) = set(value)
 
     companion object {
         fun <T> from(clazz: CatClass, valueName: String, safe: Boolean = false): CatValue<T> =

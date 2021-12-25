@@ -21,6 +21,12 @@ fun main() {
     log(a.get())
     a.set(3)
     log(a.get())
+    // 属性委托 / Property Delegation
+    var c: Int by instance.prop("a")
+    log(c)
+    c = 5
+    log(a.get())
+
 }
 
 fun log(a: Any? = null) {
