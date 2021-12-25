@@ -38,4 +38,4 @@ internal fun Class<*>.canReplaceTo(replaceTo: Class<*>): Boolean {
 
 val <reified T : Class<*>> T.new inline get() = CatClass.from(this)
 val <reified T : KClass<*>> T.new inline get() = CatClass.from(this.java)
-val <reified T : Any> T.reflect inline get() = CatClass.from(this::class.java).instance(this)
+val <reified T : Any> T.reflect inline get() = CatClass.fromInstance(this)
