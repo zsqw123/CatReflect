@@ -125,3 +125,7 @@ Class<*>.new.safeProp("awa") // 使用 safeProp 避免访问变量 / avoid acces
 prop("b").set(2)
 prop("b").get<Int>()
 ```
+
+## LICENSE
+
+[Apache License 2.0](LICENSE)
