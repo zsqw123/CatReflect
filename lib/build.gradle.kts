@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.zsqw123"
-version = "1.0.1"
+version = "1.0.2"
 
 dependencies {
 }

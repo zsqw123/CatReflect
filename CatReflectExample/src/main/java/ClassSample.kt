@@ -1,4 +1,6 @@
 import com.zsqw123.catreflect.util.new
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun main() {
     // 静态类 / create a static class
@@ -11,12 +13,16 @@ fun main() {
     instance.method("callPrivate")(1)
     // 获取及修改静态属性 / get and modify static property
     val b = static.prop<Int>("b")
-    println(b.get())
+    log(b.get())
     b.set(2)
-    println(b.get())
+    log(b.get())
     // 获取及修改成员属性 / get and modify member property
     val a = instance.prop<Int>("a")
-    println(a.get())
+    log(a.get())
     a.set(3)
-    println(a.get())
+    log(a.get())
+}
+
+fun log(a: Any? = null) {
+    println("[${SimpleDateFormat("hh:mm:ss:SSS").format(Date())}]: $a")
 }

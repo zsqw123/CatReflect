@@ -1,7 +1,6 @@
 package com.zsqw123.catreflect
 
-import com.zsqw123.catreflect.impl.CatValueImpl
-
+import com.zsqw123.catreflect.util.getOrCreateValue
 
 /**
  * Author zsqw123
@@ -15,8 +14,7 @@ abstract class CatValue<T>(
     abstract fun set(value: T)
 
     companion object {
-        fun <T> from(clazz: CatClass, valueName: String, safe: Boolean = false): CatValue<T> {
-            return CatValueImpl<T>(clazz, valueName, safe)
-        }
+        fun <T> from(clazz: CatClass, valueName: String, safe: Boolean = false): CatValue<T> =
+            getOrCreateValue(clazz, valueName, safe)
     }
 }

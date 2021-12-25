@@ -2,6 +2,7 @@ package com.zsqw123.catreflect.impl
 
 import com.zsqw123.catreflect.CatClass
 import com.zsqw123.catreflect.CatValue
+import com.zsqw123.catreflect.util.ValueDescriptor
 import java.lang.reflect.Field
 
 /**
@@ -30,8 +31,12 @@ class CatValueImpl<T>(
         return field.get(clazz.instance()) as T
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun set(value: T) {
         field.set(clazz.instance(), value)
+    }
+
+    companion object {
+        internal fun <T> create(vd: ValueDescriptor, safe: Boolean = false): CatValue<T> =
+            CatValueImpl(vd.clazz, vd.valueName, safe)
     }
 }
