@@ -13,8 +13,8 @@ If you need to use reflection a lot, then the following methods can save you a l
 1. 获得类 / Get Class
 
 ```kotlin
-val static = Sample::class.new // 静态类 / create a static class
-val instance = Sample::class.new(1) // 单参实例化 / create a instance use constructor
+val static = Sample::class.new // 只可以访问静态成员 / Only static members can be accessed
+val instance = Sample::class.new(1) // 创建了实例，静态和非静态成员均可访问 / Instances are created, both static and non-static members are accessible
 ```
 
 2. 访问函数 / Invoke Method

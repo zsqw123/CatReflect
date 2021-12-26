@@ -18,6 +18,7 @@ abstract class CatClass(private val innerClazz: Class<*>, protected var safe: Bo
 
     /** 构造函数 */
     abstract override fun invoke(vararg vars: Any?): CatClass
+    fun constructor(vararg vars: Any?): CatClass = invoke(*vars)
 
     abstract fun <T> prop(propName: String): CatValue<T>
     abstract fun <T> safeProp(propName: String): CatValue<T> // no DeclaredField
@@ -25,7 +26,12 @@ abstract class CatClass(private val innerClazz: Class<*>, protected var safe: Bo
     abstract fun safeMethod(methodName: String): CatMethod // no DeclaredMethod
 
     companion object {
+        @JvmStatic
+        @JvmOverloads
         fun from(clazz: Class<*>, safe: Boolean = false): CatClass = CatClassImpl(clazz, safe)
+
+        @JvmStatic
+        @JvmOverloads
         fun from(className: String, safe: Boolean = false): CatClass = from(Class.forName(className), safe)
         inline fun <reified C : Any> fromInstance(obj: C, safe: Boolean = false): CatClass = from(C::class.java, safe).instance(obj)
     }
