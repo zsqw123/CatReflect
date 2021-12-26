@@ -27,8 +27,10 @@ class Sample {
     }
 
     public static void main(String[] args) {
-        CatClass.from("Sample").method("staticPrivate").invoke(1,2);
-        CatClass.from(Sample.class).constructor(1).method("staticPrivate").invoke(1,2);
+        CatClass.from("Sample").method("staticPrivate").invoke(1, 2);
+        CatClass.from(Sample.class).constructor(1).method("staticPrivate").invoke(1, 2);
         CatClass.from("Sample").constructor(1).method("callPrivate").invoke(3);
+        CatClass.from("Sample").prop("b").set(1);
+        ClassSampleKt.log(CatClass.from("Sample").prop("b").get());
     }
 }

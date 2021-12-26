@@ -2,10 +2,12 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.zsqw123/cat-reflect)](https://search.maven.org/artifact/io.github.zsqw123/cat-reflect)
 
-这是一个可以极大简化 Kotlin 反射 Java 的复杂操作的工具  
-This is a tool that greatly simplifies the complex operations of Kotlin Reflection Java.
+这是一个可以极大简化 Java 反射的复杂操作的工具，适用于 Kotlin & Java  
+This is a tool that greatly simplifies the complex operations of Java reflection for Kotlin & Java.
 
-## Quick View
+[Java Usage](README.java.md)
+
+## Quick View (Kotlin)
 
 如果你需要大量操作反射，那么下面的方法可以帮你节省很多时间：  
 If you need to use reflection a lot, then the following methods can save you a lot of time
@@ -63,15 +65,15 @@ create a `CatClass` object and bind the instance:
 val Class<*>.new // 从 Class 获取 CatClass / create from Class<*>
 val KClass<*>.new // 从 KClass 获取 CatClass / create from KClass<*>
 val Any.reflect // 从已初始化对象获取 CatClass 并绑定实例 / using initialized object to create a CatClass and bind this object
-
+// no sugar / Java:
 CatClass.from(Class<*>) // `Class<*>.new` Complete call
 CatClass.from("class name") // create class by class name
 CatClass.fromInstance(Any) // `Any.reflect` Complete call
 ```
 
-通过上面的方法就可以得到静态类，但如果要使用自定义的构造函数，那么就需要用到`构造器`，构造器的参数类型将被`自动推断`，或者`手动指定`：  
-The above method will give you a static class, but if you want to use a custom constructor, then you will need to use a constructor whose parameter type will
-be `automatically inferred`, or `manually specified` as follows:
+通过上面的方法就可以得到类，但如果要使用构造函数，那么就需要用到`构造器`，构造器的参数类型将被`自动推断`，或者`手动指定`：  
+The above method will give you a class, but if you want to use constructors, then you will need to use a constructor whose parameter type will be `automatically inferred`,
+or `manually specified` as follows:
 
 ```kotlin
 Class<*>.new(1, 2, 3) // Auto type
