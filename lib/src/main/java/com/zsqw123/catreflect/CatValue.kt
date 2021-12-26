@@ -18,6 +18,8 @@ abstract class CatValue<T>(
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) = set(value)
 
     companion object {
+        @JvmStatic
+        @JvmOverloads
         fun <T> from(clazz: CatClass, valueName: String, safe: Boolean = false): CatValue<T> =
             getOrCreateValue(clazz, valueName, safe)
     }

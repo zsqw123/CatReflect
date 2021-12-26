@@ -4,6 +4,6 @@ plugins {
 }
 
 dependencies {
-//    implementation("io.github.zsqw123:cat-reflect:1.0.2")
-    implementation(project(":lib"))
+    implementation("io.github.zsqw123:cat-reflect:1.0.4")
+//    implementation(project(":lib"))
 }
