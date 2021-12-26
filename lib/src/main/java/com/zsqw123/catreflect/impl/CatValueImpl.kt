@@ -15,15 +15,17 @@ class CatValueImpl<T>(
 ) : CatValue<T>(clazz, valueName, safe) {
     private val field: Field by lazy {
         val clz = clazz.getClazz()
-        return@lazy try {
-            val f = clz.getField(valueName)
-            f.isAccessible = true
-            f
-        } catch (_: NoSuchFieldException) {
-            val f = clz.getDeclaredField(valueName)
-            f.isAccessible = true
-            f
+        var f: Field? = null
+        kotlin.runCatching {
+            f = clz.getField(valueName)
         }
+        if (f == null && !safe) f = try {
+            clz.getDeclaredField(valueName)
+        } catch (e: Exception) {
+            findParentField(clz)
+        }
+        f?.isAccessible = true
+        f ?: nsfe()
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -35,8 +37,19 @@ class CatValueImpl<T>(
         field.set(clazz.instance(), value)
     }
 
+    private fun findParentField(clz: Class<*>): Field {
+        val superClass = clz.superclass ?: nsfe()
+        return try {
+            superClass.getDeclaredField(valueName)
+        } catch (_: NoSuchFieldException) {
+            if (superClass.superclass == null) nsfe()
+            findParentField(superClass)
+        }
+    }
+
+    private fun nsfe(): Nothing = throw NoSuchFieldException("${clazz.getClazz()} $valueName")
+
     companion object {
-        internal fun <T> create(vd: ValueDescriptor, safe: Boolean = false): CatValue<T> =
-            CatValueImpl(vd.clazz, vd.valueName, safe)
+        internal fun <T> create(vd: ValueDescriptor, safe: Boolean = false): CatValue<T> = CatValueImpl(vd.clazz, vd.valueName, safe)
     }
 }
